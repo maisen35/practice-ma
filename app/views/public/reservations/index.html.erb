@@ -1,0 +1,27 @@
+<div class="contents public-reservations-index">
+  <h2>予約履歴</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>予約番号</th>
+        <th>来店（予定）日</th>
+        <th>店舗名</th>
+        <th>人数</th>
+        <th>メニュー</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% reservation_count = 0 %>
+      <% @reservations.each do |reservation| %>
+        <tr>
+          <td><%= link_to reservation.id, user_reservation_path(current_user, reservation), class: "reservation#{ reservation_count }--show_path" %></td>
+          <td><%= "#{reservation.reservation_year}年 #{reservation.reservation_month}月 #{reservation.reservation_day}日" %></td>
+          <td><%= link_to reservation.menu.restaurant.name, restaurant_path(reservation.menu.restaurant), class: "reservation#{ reservation_count }--restaurant-name" %></td>
+          <td><%= reservation.people %> 名</td>
+          <td><%= link_to reservation.menu.title, menu_path(reservation.menu), class: "reservation#{ reservation_count }--menu-title" %></td>
+        </tr>
+        <% reservation_count += 1 %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

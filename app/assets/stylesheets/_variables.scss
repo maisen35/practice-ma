@@ -1,0 +1,19 @@
+// variables
+
+  // ロゴサイズ
+  $logo-image-width: 120px;
+  $logo-image-height: 70px;
+
+  // ハンバーガーアニメーション
+  $hamburger-transition: 0.3s;
+
+  // テーマカラー
+  $thema-color1: #fffbfb;
+  $thema-color2: #ffefef;
+  $thema-color-font: #555;
+
+  // メディアクエリ
+  $media-sp-max: 480px;
+  $media-pc-min: 1024px;
+  $media-tb-min: $media-sp-max + 1px;
+  $media-tb-max: $media-pc-min - 1px;

@@ -1,0 +1,441 @@
+// Place all the styles related to the public/homes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "variables";
+
+// top
+.public-homes-top {
+
+  &__header-image {
+    margin-bottom: 10px;
+    background-image: image-url("header_3.jpg");
+    background-size: 130%;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0.6);
+    background-blend-mode: lighten;
+
+    &__contents {
+
+      h2, p {
+        margin-top: 0;
+        color: black;
+        text-align: center;
+        font-family: 'Philosopher', serif;
+      }
+
+      div {
+        width: 60%;
+        margin: 20px auto;
+        display: flex;
+
+      }
+
+      .btn {
+        color: white;
+        display: block;
+        margin: 0 auto;
+        opacity: 0.9;
+        flex: 1;
+      }
+
+      .btn-success {
+        margin-right: 20px;
+      }
+
+      .btn-warning {
+        color: black;
+        width: 60%;
+      }
+    }
+  }
+
+  &__body {
+
+    a {
+      color: $thema-color-font;
+    }
+
+    &__main {
+      margin: 0 auto;
+      padding: 0 20px 20px;
+      max-width: 100%;
+      flex: 1;
+
+      .top-nav {
+        display: flex;
+      }
+      .top-menu, .top-restaurant {
+        margin: 10px 0;
+        padding: 10px;
+        border: solid $thema-color-font 1px;
+        border-radius: 20px;
+      }
+
+      &__restaurants-all {
+
+        h2 {
+          margin: 30px 0 10px;
+          text-align: center;
+        }
+        h3 {
+          margin-top: 0;
+        }
+      }
+
+      &__menus-all {
+
+        h2 {
+          margin: 30px 0 10px;
+          text-align: center;
+        }
+        h3 {
+          margin-top: 0;
+        }
+      }
+    }
+
+    &__side {
+
+      .new-menus {
+
+        h2 {
+          font-size: 20px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+// about
+.public-homes-about {
+  padding: 40px 70px;
+  background-image: image-url("about_background.jpg");
+  background-size: 130%;
+  background-color: rgba(255, 0, 0, 0.2);
+  background-position: center;
+  background-blend-mode: lighten;
+  background-attachment: fixed;
+
+  &__contents {
+    margin: 10px auto;
+    padding: 30px;
+    border-radius: 50px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0px 0px 50px white;
+
+    h2 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-style: italic;
+      text-decoration: underline;
+      text-align: center;
+    }
+
+    p {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    li {
+      padding: 20px;
+      margin: 20px;
+      flex: 1;
+      text-align: center;
+      border-radius: 30px;
+      opacity: 0.8;
+
+      h3 {
+        margin: 10px 0 30px;
+      }
+      p {
+        text-align: left;
+        letter-spacing: 0.2em;
+      }
+
+      &:nth-child(1) {
+        background: #FCDDD7;
+      }
+      &:nth-child(2) {
+        background: #CDFACD;
+      }
+      &:nth-child(3) {
+        background: #E6DCC1;
+      }
+      &:nth-child(4) {
+        background: #FFD4FF;
+      }
+    }
+  }
+}
+
+.public-homes {
+
+  &-privacy, &-terms, &-admin {
+
+    h3 {
+      margin-top: 20px;
+    }
+  }
+}
+
+// スマホ画面
+@media (max-width: $media-sp-max) {
+
+  // top
+  .public-homes-top {
+
+    &.top-contents {
+      padding-top: 20px;
+    }
+
+    &__header-image {
+      height: 200px;
+
+      &__contents {
+        padding-top: 8%;
+      }
+
+      .btn-warning {
+        display: none;
+      }
+    }
+
+    &__body {
+
+      &__side {
+        width: 100%;
+        margin-top: 20px;
+        padding: 0;
+        background-color: $thema-color2;
+
+        > div {
+          margin-top: 20px;
+          padding: 20px;
+        }
+      }
+    }
+
+    .restaurant_image, .menu_image {
+      width: 100px;
+      height: 70px;
+    }
+
+    .top-nav, .simple-mypage, .new-registration, .new-menus {
+      display: none;
+    }
+  }
+
+
+  .box {
+    width: 100%;
+    height: 300px;
+    border: 1px solid black;
+    border-radius: 5px;
+  }
+
+  // about
+  .public-homes-about {
+    padding: 20px 20px;
+
+    &__contents {
+      padding: 5px;
+    }
+  }
+}
+
+// タブレット画面
+@media (min-width: $media-tb-min) and (max-width: $media-tb-max) {
+  .public-homes-top {
+
+    &__header-image {
+      height: 400px;
+
+      &__contents {
+        padding-top: 7%;
+      }
+    }
+
+    &__body {
+
+      &__side {
+        margin-top: 20px;
+        padding: 10px;
+        flex-shrink: 0;
+        width: 100%;
+
+        &> div {
+          margin-top: 20px;
+          padding: 20px;
+          background-color: $thema-color2;
+        }
+      }
+    }
+
+    .top-container {
+      margin: 0 auto;
+      padding: 0 70px;
+    }
+
+    .top-nav {
+      display: flex;
+
+      a {
+        display: inline-block;
+        flex: 1;
+        text-align: center;
+        padding: 0.6em;
+        border-bottom: 3px solid white;
+
+        &:hover {
+          border-bottom: 3px solid orange;
+          transition: 500ms;
+          background: linear-gradient(#fff, #eee);
+        }
+      }
+    }
+  }
+}
+
+// タブレット・PC共通
+@media (min-width: $media-tb-min) {
+  .public-homes-top {
+
+    .menu_image, .restaurant_image {
+      object-fit: cover;
+      width: 200px;
+      height: 150px;
+    }
+  }
+}
+
+// PC画面
+@media (min-width: $media-pc-min) {
+  .public-homes-top {
+
+    &__header-image {
+      height: 300px;
+
+      &__contents {
+        padding-top: 60px;
+      }
+    }
+
+    &__body {
+      padding: 0 70px;
+      display: flex;
+
+      &__side {
+        margin-top: 20px;
+        padding: 10px;
+        flex-shrink: 0;
+        width: 300px;
+
+        & > div {
+          margin-top: 20px;
+          padding: 20px;
+          background-color: $thema-color2;
+        }
+      }
+    }
+  }
+
+  .top-nav a {
+    display: inline-block;
+    flex: 1;
+    text-align: center;
+    padding: 0.6em;
+    border-bottom: 3px solid white;
+  }
+
+  .top-nav a:hover {
+    border-bottom: 3px solid orange;
+    transition: 500ms;
+    background: linear-gradient(#fff, #eee);
+  }
+
+  .top-container {
+    margin: 0 auto;
+    padding: 0 70px;
+  }
+
+  // terms
+  .homes-container {
+    max-width: 900px;
+    padding: 70px;
+  }
+
+  // about
+  .public-homes-about {
+    padding: 40px 70px;
+
+    ul {
+      display: flex;
+
+      li {
+        flex: 1;
+      }
+    }
+  }
+}
+
+// これより下、未refactoring
+// /public/homes/top
+.homes-container li {
+  list-style-type: decimal;
+}
+
+.restaurant-info, .menu-info {
+  padding-left: 10px;
+}
+
+.registration {
+  background-color: lightgoldenrodyellow;
+  text-align: center;
+  text-decoration: none;
+  font-size: 2em;
+}
+
+.new-registration {
+  text-align: center;
+}
+
+.new-registration p {
+  margin-top: 10px;
+}
+
+.new-menus {
+  h4 {
+  width: 180px;
+  margin: 0 auto;
+  border-bottom: 1px solid #dddddd;
+  }
+
+  li {
+    text-align: center;
+  }
+}
+
+.side-bar-menu-image {
+  text-align: center;
+}
+
+#menu-show-link {
+  text-align: left;
+}
+
+#get-position {
+  width: 100px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+#get-position:hover {
+  cursor: pointer;
+}
+
+#map {
+  height: 400px;
+  margin-top: 10px;
+}

@@ -1,0 +1,100 @@
+<div class="owner-menus-_form">
+  <%= form_with model: [current_restaurant, menu], url: url, method: method, local: true do |f| %>
+    <section>
+      <div class="menu-form1">
+        <h3>メニュー画像</h3>
+        <div class="menu-image">
+          <%= f.attachment_field :menu_image, class: "attachment_image" %>
+          <div class="image-preview"></div>
+          <div id="api-tag-list"></div>
+          <p>タグの追加（※重複するタグは１つにまとめられます。）</p>
+          <%= text_field_tag :tag_name %>
+          <%= button_tag '追加', type: 'button', class: "add-tag-btn" %>
+          <div id="tag-list"></div>
+          <% if action_name == 'edit' %>
+            <h4>現在のタグ一覧</h4>
+            <% menu.menu_tags.each do |menu_tag| %>
+              <p class="inline-block" id="existing-tags">
+                <%= hidden_field_tag "existing_tag[]", menu_tag.id %>
+                <span class="menu-tag"><%= menu_tag.tag.name %> <a>x</a></span>
+              </p>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="menu-form2">
+        <h3>メニュー詳細</h3>
+        <table>
+          <tbody>
+            <tr>
+              <td><%= f.label :title %></td>
+              <td><%= f.text_field :title, required: true %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :regular_price, '正規価格（税抜き）：' %></td>
+              <td><%= f.number_field :regular_price, required: true, placeholder: 1100 %> 円</td>
+            </tr>
+            <tr>
+              <td><%= f.label :discount_price, '提供価格（税抜き）：' %></td>
+              <td><%= f.number_field :discount_price, required: true, placeholder: 1000 %> 円</td>
+            </tr>
+            <tr>
+              <td><%= f.label :reservation_method %></td>
+              <td><%= f.select :reservation_method, Menu.reservation_methods_i18n.invert %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :is_sale_frag %></td>
+              <td><%= f.select :is_sale_frag, [['販売中', true], ['販売停止中', false]] %></td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>推奨タグ</h3>
+        <table>
+          <tbody>
+            <tr>
+              <td><h4>タグの追加<br>（一つ以上選択推奨）</h4></td>
+              <td>
+                <% tag_count = 0 %>
+                <% tags.each do |tag| %>
+                  <%# 推奨タグ7個を表示 %>
+                  <% if tag_count < 7 %>
+                    <div class="check-box">
+                      <% if menu_tags.exists?(tag_id: tag.id) %>
+                        <%= check_box :tag_id, tag.id, checked: true %>
+                        <%= label_tag :tag_id, tag.name %>
+                      <% else %>
+                        <%= check_box :tag_id, tag.id %>
+                        <%= label_tag :tag_id, tag.name %>
+                      <% end %>
+                    </div>
+                    <% tag_count += 1 %>
+                  <% else %>
+                    <% break %>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="content-form">
+        <%= f.label :content %>
+        <%= f.text_area :content %>
+      </div>
+      <div class="cancel-form">
+        <%= f.label :cancel %>
+        <%= f.text_area :cancel %>
+      </div>
+    </section>
+
+    <div class="submit"><%= f.button submit, onclick: 'submit();', type: 'button', class: "btn btn-primary" %></div>
+
+  <% end %>
+  <%= link_to '一覧に戻る', owner_restaurant_menus_path(current_restaurant) %>
+  <% if action_name == 'edit' %>
+    <%= link_to '詳細に戻る', owner_restaurant_menu_path(current_restaurant, menu) %>
+  <% end %>
+</div>

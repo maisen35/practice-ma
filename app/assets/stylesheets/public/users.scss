@@ -1,0 +1,254 @@
+// Place all the styles related to the public/users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "variables";
+
+// profile
+.profile_image {
+  object-fit: cover;
+}
+
+.public-users-_user_links {
+  margin-top: 20px;
+}
+
+// new
+.password-confirmation {
+
+  &--confirm {
+    display: inline;
+  }
+}
+
+// sessions/new
+.public-users-sessions-new {
+  text-align: center;
+
+  h2 {
+    margin: 20px 0;
+  }
+}
+
+// registrations/new
+.public-users-registrations-new {
+
+  .registration-form {
+
+    h2 {
+      text-align: center;
+    }
+
+    h3 {
+      margin-top: 1rem;
+      margin-bottom: 0;
+    }
+
+    .form-group {
+      padding: 0 15px;
+    }
+
+    .flex {
+
+      .form-group {
+        flex: 1;
+      }
+    }
+
+    &__submit {
+      text-align: center;
+    }
+  }
+}
+
+// registrations/confirm
+.public-users-registrations-confirm {
+
+  .confirm-form {
+
+    h2 {
+      text-align: center;
+    }
+
+    h3 {
+      margin-top: 1rem;
+      margin-bottom: 0;
+    }
+
+    p {
+
+      &:nth-of-type(2) {
+        margin: 20px 0;
+      }
+    }
+
+    .flex {
+
+      .form-group {
+        flex: 1;
+      }
+    }
+
+    &__submit {
+      text-align: center;
+    }
+  }
+}
+
+// スマホ
+@media (max-width: $media-sp-max) {
+
+  // registrations/new
+  .public-users-registrations-new {
+
+    h2 {
+      margin: 10px 0;
+    }
+
+    h3 {
+      margin-top: 20px;
+    }
+
+    td {
+      padding-top: 20px;
+    }
+  }
+
+  // registrations/confirm
+  .public-users-registrations-confirm {
+
+    .confirm-form__submit {
+
+      .btn-success {
+        margin-left: 20px;
+      }
+    }
+  }
+}
+
+// PC・タブレット共通
+@media (min-width: $media-tb-min) {
+  //registrations/new
+  .public-users-registrations-new {
+
+    .registration-form {
+
+      &__number-email, &__password {
+        display: flex;
+
+        .form-group {
+          flex: 1;
+        }
+      }
+    }
+  }
+
+  // registrations/confirm
+  .public-users-registrations-confirm {
+
+    .confirm-form {
+
+      &__number-email, &__password {
+        display: flex;
+
+        .form-group {
+          flex: 1;
+        }
+      }
+    }
+  }
+
+  .user-links {
+    padding: 20px;
+    margin: 20px;
+    border: 3px solid black;
+    border-radius: 10px;
+    background: $thema-color2
+  }
+
+  .sns-btn {
+    width: 50px;
+    margin: 5px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 5px;
+  }
+
+  .user-info div, .user-profile div, .user-sns, .profile-contents, .user-status, .user-performance {
+    margin: 20px auto 10px;
+  }
+
+  .box {
+    width: 300px;
+    height: 300px;
+    border: 1px solid black;
+    border-radius: 5px;
+  }
+
+  .new-user-performance {
+    flex-wrap: wrap;
+  }
+
+  .user-performance h3 {
+    text-align: center;
+    grid-area: title;
+  }
+  .new-menu-reviewees {
+    margin: 0 auto;
+    grid-area: box1;
+  }
+  .new-restaurant-reviewees {
+    margin: 0 auto;
+    grid-area: box2;
+  }
+  .new-reviewers {
+    margin: 0 auto;
+    grid-area: box3;
+  }
+  .new-reservations {
+    margin: 0 auto;
+    grid-area: box4;
+  }
+
+  // /public/users/profile
+  .profile-image {
+    text-align: center;
+    margin-right: 20px;
+    flex: 1;
+  }
+
+  .handle-name-sns {
+    padding-left: 10px;
+    flex: 1;
+  }
+
+  // /public/users/edit
+  .public-users-edit {
+
+    h2 {
+      margin: 20px 0;
+    }
+
+    > h2 {
+      text-align: center;
+    }
+  }
+
+  .users-edit-btn {
+    justify-content: space-between;
+  }
+  .users-edit-btn .submit {
+    flex: 1;
+    text-align: right;
+  }
+  .users-edit-btn .destroy {
+    flex: 1;
+    text-align: right;
+    font-size: 0.8em;
+  }
+
+}
+
+.session {
+  text-align: center;
+}

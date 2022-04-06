@@ -1,0 +1,506 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+@import "variables";
+@import "bootstrap";
+
+* {
+  margin: 0;
+  color: $thema-color-font;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+header {
+  border-bottom: solid 1px #ccc;
+}
+
+body {
+  background-color: $thema-color1;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.17em;
+}
+
+h4 {
+  font-size: unset;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  margin-bottom: 0;
+}
+
+label {
+  font-weight: unset;
+}
+
+.flex {
+  display: flex;
+}
+
+.grid {
+  display: grid;
+}
+
+#hide {
+  display: inherit;
+}
+
+.hidden {
+  display: none;
+}
+
+.under-line {
+  text-decoration: underline;
+}
+
+.center {
+  text-align: center;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.error-messages li {
+  margin: 0;
+  list-style: disc;
+}
+
+.error-form {
+  border: 1px solid #ff80bd;
+  box-shadow: 0 0 0 0.2rem rgba(255, 123, 0, 0.25);
+}
+.success-form {
+  box-shadow: 0px 0px 5px green;
+  border: 1px solid green;
+}
+.error-message, .alert-error {
+  color: red;
+}
+.success-message {
+  color: green;
+}
+
+.inactive {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.menu_image, .restaurant_image, .user_image {
+  object-fit: cover;
+}
+
+.pc-header {
+  justify-content: space-between;
+
+  li {
+    margin: 0 10px;
+  }
+}
+
+.contents {
+  min-height: 300px;
+  padding: 20px;
+}
+
+body {
+
+  img[alt="header-logo"], img[alt="footer-logo"] {
+    object-fit: cover;
+    width: $logo-image-width;
+    height: $logo-image-height;
+  }
+}
+
+// お知らせメッセージ
+// application.html.erb
+.layouts-app-header {
+  &__notice {
+    line-height: 30px;
+
+    p {
+      color: black;
+      text-align: center;
+      animation: blinkAnime 1s infinite alternate;
+    }
+
+    @keyframes blinkAnime{
+      0% { color: $thema-color1 }
+      100% { color: #ff0000 }
+    }
+  }
+}
+main {
+
+  .main {
+
+    .flash-window  {
+      height: 50px;
+      padding: 10px;
+      color: white;
+      background: black;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      transition: 0.5s 0s ease;
+
+      bottom: 40px;
+      left: 0;
+      right: 0;
+      margin: auto;
+
+      p {
+        color: white;
+
+        span {
+          margin-left: 1vw;
+          color: white;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+
+      &.shut {
+        opacity: 0;
+        bottom: -50px;
+      }
+    }
+  }
+}
+
+.flash-window {
+  height: 30px;
+  background: black;
+  color: white;
+}
+
+//devise
+.devise-form h2 {
+  margin: 20px 0;
+}
+
+.actions {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.registration-btn {
+  padding: 1em;
+  font-size: 1.1em;
+  background-color: #ffdd00;
+}
+
+// footer
+footer {
+  padding: 20px 0 40px;
+  border-top: solid 1px #ccc;
+}
+
+.copyright {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.footer-container {
+  justify-content: space-around;
+}
+
+.footer-links li {
+  font-size: 0.8em;
+}
+
+.move-head {
+  position: fixed;
+  bottom: 100px;
+  right: 15px;
+}
+
+#move-head--icon {
+  width: 50px;
+  height: 50px;
+  background-color: rgba($color: #ffdd00, $alpha: 0.5);
+  border: #ffaa00;
+  text-align: center;
+  position: relative;
+}
+
+#move-head--icon > .fa-arrow-up {
+  line-height: 50px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+#move-head--icon:hover {
+  cursor: pointer;
+}
+
+input[readonly], textarea[readonly] {
+  background-color: $thema-color1;
+  font-weight: bold;
+  border: none;
+  outline: none;
+}
+
+// PC端末用
+@media (min-width: $media-pc-min) {
+}
+
+// PC・タブレット共通
+@media (min-width: $media-tb-min) {
+
+  main {
+
+    .main {
+
+      .flash-window  {
+        width: 500px;
+      }
+    }
+  }
+
+  .contents {
+    margin: 0 auto;
+    padding-left: 70px;
+    padding-right: 70px;
+    max-width: 900px;
+  }
+
+  .sp-header {
+    display: none;
+  }
+
+  .layouts-app-header {
+    padding: 0 70px;
+    line-height: 70px;
+    margin: 0 auto;
+  }
+
+  // public/user/profile
+  .profile-head {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+// タブレット端末用
+@media (min-width: $media-tb-min) and (max-width: $media-tb-max) {
+}
+
+// スマホ用
+@media (max-width: $media-sp-max) {
+
+  td, th {
+    padding: 0px;
+  }
+
+  .pc {
+    display: none;
+  }
+
+  .registration-btn {
+    padding: 0.5em;
+    font-size: 1.1em;
+    background-color: #ffdd00;
+  }
+
+  .layouts-app-header {
+    width: auto;
+    padding: 0 20px;
+    margin: 0 auto;
+
+    .sp-header {
+      height: 70px;
+      justify-content: space-between;
+
+      &__left, &__center {
+        flex: 1;
+      }
+
+      &__right {
+        flex: 1;
+
+        .login, .alert {
+          padding-top: 10px;
+          text-align: center;
+          float: right;
+
+          i {
+            display: block;
+          }
+          small {
+            display: block;
+            padding-bottom: 5px;
+          }
+        }
+
+        .alert {
+          line-height: 70px;
+        }
+      }
+    }
+  }
+
+  .pc-header {
+    display: none;
+  }
+
+  header {
+    position: relative;
+  }
+
+  .sp-header .logo-image {
+    width: $logo-image-width;
+    margin-right: 50%;
+    left: 40%;
+  }
+
+  .sp-header__left {
+
+    .hamburger-menu {
+      width: 50%;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.9);
+      position: fixed;
+      transition: $hamburger-transition 0s linear;
+      top: 0;
+      left: 0;
+      z-index: 1;
+
+      ul {
+        margin-top: 120px;
+
+        li {
+          margin: 20px 0 20px 30px;
+        }
+      }
+
+      a {
+        color: white;
+      }
+
+      &.shut {
+        left: -50%;
+      }
+    }
+  }
+
+  .hamburger-button {
+    width: 40px;
+    height: 40px;
+    background: rgba($color: white, $alpha: 0.7);
+    border: solid 1px #aaa;
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
+    position: fixed;
+    top: 40px;
+    transition: $hamburger-transition 0s linear;
+    z-index: 2;
+
+    &.circle {
+      background: rgba($color: black, $alpha: 0);
+      border-radius: 50%;
+    }
+  }
+
+  .bar {
+    width: 80%;
+    height: 3px;
+    background-color: #aaa;
+    position: absolute;
+    border-radius: 3px;
+    left: 10%;
+    transition: $hamburger-transition 0s linear;
+  }
+
+  .bar-top {
+    top: 22%;
+  }
+  .bar-center {
+    top: 44%;
+  }
+  .bar-bottom {
+    top: 70%;
+  }
+  .circle .bar-top {
+    top: 47%;
+    transform: rotate(45deg);
+  }
+  .circle .bar-center {
+    top: 44%;
+    opacity: 0;
+  }
+  .circle .bar-bottom {
+    transform: rotate(-45deg);
+    top: 47%;
+  }
+
+  .alert {
+    padding: 0;
+    padding-top: 4px;
+    margin-bottom: 0;
+    position: relative;
+    line-height: 30px;
+  }
+
+  // 未読メッセージの通知アイコン
+  .icon {
+    width: 10px;
+    height: 10px;
+    background-color: orange;
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+    left: 0;
+  }
+
+  // public/users/profile
+  .profile_image {
+    padding-right: 0;
+  }
+
+  main {
+
+    .main {
+
+      .flash-window  {
+        width: 90%;
+
+        p {
+          font-size: 4vw;
+        }
+      }
+    }
+  }
+}

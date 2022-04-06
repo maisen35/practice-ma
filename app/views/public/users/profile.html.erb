@@ -1,0 +1,51 @@
+<div class="contents public-users-profile">
+  <small>
+    このページは店舗アカウントからも閲覧可能です。<br>
+    プロフィールに個人情報を記載される際は、十分ご注意ください。
+  </small>
+  <div class="profile-head">
+    <div class="profile-image">
+      <%= attachment_image_tag @user, :profile_image, format: "jpeg", size: '250x250', fallback: "no_image.png", class: 'circle' %>
+    </div>
+    <div class="handle-name-sns">
+      <h3>HN：<%= @user.handle_name %></h3>
+      <div class="user-sns">
+        <h3>SNS</h3>
+        <ul class="flex">
+          <%= link_to "https://twitter.com/#{ @user.twitter }", target: :_blank do %>
+            <li class="sns-btn"><i class="fab fa-twitter"></i><%=  %></li>
+          <% end %>
+          <%= link_to "https://facebook.com/profile.php?id=#{ @user.facebook }", target: :blank do %>
+            <li class="sns-btn"><i class="fab fa-facebook-f"></i></li>
+          <% end %>
+          <%= link_to "https://instagram.com/#{ @user.instagram }", target: :blank do %>
+            <li class="sns-btn"><i class="fab fa-instagram"></i></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="profile-contents">
+    <h3>プロフィール：</h3>
+    <%= @user.profile %>
+  </div>
+
+  <div class="hidden user-status">
+    <h3>実績</h3>
+    <h4>会員ランク：<%#= @user.rank %></h4>
+    <h4>予約数：<%= @user.reservations.count %> 件</h4>
+    <h4>レビューした数：<%#= @restaurant_reviews.count + @menu_reviews.count %></h4>
+    <h4>レビューされた数：<%#= @@user_reviews.count %></h4>
+  </div>
+
+  <div class="hidden user-performance">
+    <h3 class="title">最新の実績</h3>
+    <div class="flex new-user-performance">
+      <div class="box new-menu-reviewees"></div>
+      <div class="box new-restaurant-reviewees"></div>
+      <div class="box new-reviewers"></div>
+      <div class="box new-reservations"></div>
+    </div>
+  </div>
+
+</div>

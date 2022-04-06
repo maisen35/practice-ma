@@ -1,0 +1,68 @@
+<div class="contents public-reservations-show">
+  <h2>ご予約の詳細</h2>
+  <table>
+    <tbody>
+      <tr>
+        <td><h3>予約完了日</h3></td>
+        <td></td>
+        <td><p><%= @reservation.created_at.to_s(:datetime_jp) %></p></td>
+      </tr>
+      <tr>
+        <td><h3>予約日時（来店日時）</h3></td>
+        <td><h4>ご予約日</h4></td>
+        <td><p><%= "#{@reservation.reservation_year}年 #{@reservation.reservation_month}月 #{@reservation.reservation_day}日" %></p></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><h4>ご予約時間帯</h4></td>
+        <td><p><%= @reservation.reservation_time %>:00</p></td>
+      </tr>
+      <tr>
+        <td><h3>店舗名</h3></td>
+        <td></td>
+        <td><p><%= link_to @restaurant.name, restaurant_path(@restaurant) %></p></td>
+      </tr>
+      <tr>
+        <td><h3>メニュー</h3></td>
+        <td></td>
+        <td><p><%= link_to @menu.title, menu_path(@menu) %></p></td>
+      </tr>
+      <tr>
+        <td><h3>予約者氏名</h3></td>
+        <td></td>
+        <td><p><%= @user.name %> 様</p></td>
+      </tr>
+      <tr>
+        <td><h3>人数</h3></td>
+        <td></td>
+        <td><p><%= @reservation.people %> 名様</p></td>
+      </tr>
+      <tr>
+        <td><h3>ご連絡先</h3></td>
+        <td><h4>電話番号</h4></td>
+        <td><p><%= @user.phone_number %></p></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><h3>メールアドレス</h3></td>
+        <td><p><%= @user.email %></p></td>
+      </tr>
+      <tr>
+        <td><h3>お支払い方法</h3></td>
+        <td></td>
+        <td><p><%= @reservation.payment_method_i18n %></p></td>
+      </tr>
+      <tr>
+        <td><h3>店舗からのお知らせ</h3></td>
+        <td></td>
+        <td><p><%= @restaurant.completion_message %></p></td>
+      </tr>
+      <tr>
+        <td><h3>ご予約のキャンセルについて</h3></td>
+        <td></td>
+        <td><p><%= @menu.cancel %></p></td>
+      </tr>
+    </tbody>
+  </table>
+  <%= link_to 'マイページへ戻る', user_mypage_path %>
+</div>

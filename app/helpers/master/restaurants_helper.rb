@@ -1,0 +1,2 @@
+module Master::RestaurantsHelper
+end

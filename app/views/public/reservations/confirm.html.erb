@@ -1,0 +1,29 @@
+<div class="contents public-reservations-confirm">
+  <%= form_with model: [current_user, @reservation], url: user_reservations_path, local: true do |f| %>
+    <h2>予約情報の確認</h2>
+    <h3>メニュー名</h3>
+    <%= @menu.title %>
+    <h3>ご予約日時</h3>
+    <%= "#{ @reservation.reservation_year }年 #{ @reservation.reservation_month }月 #{ @reservation.reservation_day }日 #{ @reservation.reservation_time }:00" %>
+    <h3>人数</h3>
+    <p><%= f.text_field :people, value: @reservation.people, size: '2', readonly: true %> 名</p>
+    <h3>お支払い方法</h3>
+    <p><%= @reservation.payment_method_i18n %></p>
+    <h3>内容</h3>
+    <%= @menu.content %>
+    <h3>キャンセル規定</h3>
+    <%= @menu.cancel %>
+    <div class="reservation-form">
+
+    <%= f.hidden_field :menu_id, value: @menu.id %>
+    <%= f.hidden_field :payment_method, value: @reservation.payment_method %>
+    <%= f.hidden_field :reservation_year, value: @reservation.reservation_year %>
+    <%= f.hidden_field :reservation_month, value: @reservation.reservation_month %>
+    <%= f.hidden_field :reservation_day, value: @reservation.reservation_day %>
+    <%= f.hidden_field :reservation_time, value: @reservation.reservation_time %>
+
+    <%= f.submit '修正する', class: "btn btn-outline-dark", name: :back %>
+    <%= f.submit '予約を確定する', class: "btn btn-primary" %>
+  <% end %>
+
+</div>

@@ -1,0 +1,131 @@
+<%# JSにレストラン情報を渡す %>
+<%= hidden_field_tag :restaurants_json, value: @restaurants_json %>
+
+<div class="public-homes-top">
+  <section class="public-homes-top__header-image">
+    <div class="public-homes-top__header-image__contents">
+      <h2>Connect With Trust</h2>
+      <p>あなたの街の飲食店を、あなたの信頼でお得に予約する。</p>
+      <% unless user_signed_in? %>
+        <div>
+          <%= link_to '新規登録', new_user_registration_path, class: "btn btn-success" %>
+          <%= link_to 'ログイン', new_user_session_path, class: "btn btn-primary" %>
+        </div>
+        <%= link_to 'サービス紹介', about_path, class: 'btn btn-warning' %>
+      <% end %>
+    </div>
+  </section>
+
+  <%# メインコンテンツ %>
+  <section class="top-container public-homes-top__body">
+    <div class="public-homes-top__body__main">
+      <ul class="top-nav">
+        <%= link_to about_path do %>
+          <li>サービス紹介</li>
+        <% end %>
+        <%= link_to do %>
+          <li>特集</li>
+        <% end %>
+        <%= link_to menus_path do %>
+          <li>メニュー一覧</li>
+        <% end %>
+        <%= link_to restaurants_path do %>
+          <li>レストラン一覧</li>
+        <% end %>
+      </ul>
+      <div class="public-homes-top__body__main__restaurants-all">
+        <h2>おすすめレストラン</h2>
+        <% restaurant_count = 0 %>
+        <% @restaurants.each do |restaurant| %>
+          <%# 最新の店舗3件まで表示 %>
+          <% if restaurant_count < 3 %>
+            <div class="flex top-restaurant">
+              <div class="restaurant-image">
+                <%= link_to restaurant_path(restaurant), class: "restaurant-image#{ restaurant_count }" do %>
+                  <%= attachment_image_tag restaurant, :restaurant_image, fallback: "no_image.png" %>
+                <% end %>
+              </div>
+              <div class="restaurant-info">
+                <h3><%= link_to restaurant.name, restaurant_path(restaurant) %></h3>
+                <p><%= restaurant.address %></p>
+              </div>
+            </div>
+          <% restaurant_count += 1 %>
+          <% else %>
+            <% break %>
+          <% end %>
+        <% end %>
+        <p><%= link_to 'レストラン一覧', restaurants_path %></p>
+      </div>
+      <div class="public-homes-top__body__main__menus-all">
+        <h2>おすすめメニュー</h2>
+        <% menu_count = 0 %>
+        <% @menus.each do |menu| %>
+          <%# 最新のメニュー3個まで表示 %>
+          <% if menu_count < 3 %>
+            <div class="flex top-menu">
+              <div class="menu-image">
+                <%= link_to menu_path(menu), class: "menu-image#{ menu_count }" do %>
+                  <%= attachment_image_tag menu, :menu_image, fallback: "no_image.png" %>
+                <% end %>
+              </div>
+              <div class="menu-info">
+                <h3><%= link_to menu.title, menu_path(menu) %></h3>
+                <p>店名：<%= menu.restaurant.name %></p>
+                <h4>正規価格：<%= menu.regular_price.to_s(:delimited) %> 円</h4>
+                <h4>提供価格：<%= menu.discount_price.to_s(:delimited) %> 円</h4>
+              </div>
+            </div>
+          <% menu_count += 1 %>
+          <% else %>
+            <% break %>
+          <% end %>
+        <% end %>
+        <p><%= link_to 'メニュー一覧', menus_path %></p>
+      </div>
+    </div>
+
+    <%# サイドバー %>
+    <div class="public-homes-top__body__side">
+      <% if user_signed_in? %>
+        <div class="simple-mypage">マイページ</div>
+      <% else %>
+        <div class="new-registration">
+          <%= link_to '新規登録', new_user_registration_path, class: "btn registration" %>
+          <p>登録済みの方は<%= link_to 'こちら', new_user_session_path%></p>
+        </div>
+      <% end %>
+      <div class="new-menus">
+        <h2>最近更新されたメニュー</h2>
+        <div>
+          <ul class="new-menus-list">
+            <% menu_count = 0 %>
+            <% @menus.each do |menu| %>
+              <%# 最新のメニュー3個まで表示 %>
+              <% if menu_count < 3 %>
+                <li class="top-menu">
+                  <p><%= link_to menu.title, menu_path(menu), class: "side-bar--menu#{ menu_count }-title", id: 'menu-show-link' %></p>
+                  <%= link_to menu_path(menu), class: "side-bar--menu#{ menu_count }-image" do %>
+                    <%= attachment_image_tag menu, :menu_image, width: 200, height: 100, fallback: "no_image.png" %>
+                  <% end %>
+                </li>
+                <% menu_count += 1 %>
+              <% else %>
+                <% break %>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <div class="search">
+        <p id="get-position"><u>周辺から探す</u></p>
+        <small><span id="loading"></span></small>
+        <p class="location-result true hidden"></p>
+        <p class="location-result false hidden">現在地情報が利用できませんでした。</p>
+        <p class="location-result error hidden">レストラン情報が取得できませんでした。</p>
+        <div id="map" class="location-result true hidden"></div>
+      </div>
+    </div>
+
+  </section>
+</div>

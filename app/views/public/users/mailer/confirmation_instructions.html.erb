@@ -1,0 +1,7 @@
+<p><%= @resource.name %> 様</p>
+<p>◇以下のリンクにアクセスすると登録・更新が完了します。◇</p>
+<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p>
+  ◇ご注意◇<br>
+  24時間を過ぎますとリンクが無効になりますので、改めてお手続きをお願い致します。
+</p>

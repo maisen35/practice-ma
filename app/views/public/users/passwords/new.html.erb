@@ -1,0 +1,17 @@
+<h2>パスワードをお忘れの方</h2>
+<p>ご登録のメールアドレス宛にパスワードを再発行します。<br>
+  ご登録のメールアドレスをお忘れの方は<u>daikichi852@icloud.com</u>までお問い合わせください。</p>
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= render "public/users/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :email, 'ご登録のメールアドレス' %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "メールを送信する" %>
+  </div>
+<% end %>
+
+<%= render "public/users/shared/links" %>

@@ -1,0 +1,135 @@
+// Place all the styles related to the contacts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "variables";
+
+// 共通
+.contacts-new {
+
+  h2, p {
+    text-align: center;
+  }
+
+  table {
+    width: 100%;
+    margin: 0 auto;
+
+    tr {
+
+      td {
+        padding: 20px;
+        border: solid 1px black;
+
+        &:nth-child(1) {
+          background-color: rgba($color: gray, $alpha: 0.2);
+        }
+
+        h3 {
+          margin: 0;
+
+          label {
+            margin: 0;
+          }
+        }
+
+        p {
+          margin-top: 10px;
+          text-align: unset;
+        }
+      }
+    }
+  }
+
+  .submit {
+    margin-top: 20px;;
+    text-align: center;
+  }
+
+  #contacts-new__email-form {
+    width: 100%;
+    max-width: 400px;
+  }
+  #contacts-new__message-form {
+    width: 100%;
+    max-width: 400px;
+    height: 100px;
+  }
+}
+
+.contacts-confirm {
+  h2, p {
+    text-align: center;
+  }
+
+  table {
+    width: 100%;
+    margin: 0 auto;
+
+    tr {
+
+      td {
+        padding: 20px;
+        border: solid 1px black;
+
+        &:nth-child(1) {
+          background-color: rgba($color: gray, $alpha: 0.2);
+        }
+
+        h3 {
+          margin: 0;
+
+          label {
+            margin: 0;
+          }
+        }
+
+        p {
+          text-align: unset;
+
+          textarea {
+            resize: none;
+          }
+        }
+      }
+    }
+  }
+
+  .submit {
+    margin-top: 20px;;
+    text-align: center;
+  }
+}
+
+// スマホ
+@media (max-width: $media-sp-max) {
+}
+
+// スマホ・タブレット共通
+@media (max-width: $media-tb-max) {
+  .contacts-new, .contacts-confirm {
+    text-align: center;
+
+    td {
+      display: block;
+    }
+  }
+}
+
+// タブレット
+@media (min-width: $media-tb-min) and (max-width: $media-tb-max) {
+}
+
+// PC・タブレット共通
+@media (min-width: $media-tb-min) {
+}
+
+// PC
+@media (min-width: $media-pc-min) {
+  .contacts-new, .contacts-confirm {
+    td:nth-child(1) {
+      min-width: 410px;
+    }
+  }
+}
+

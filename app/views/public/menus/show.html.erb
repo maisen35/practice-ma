@@ -1,0 +1,53 @@
+<div class="contents public-menus-show">
+  <h2>メニュー内容</h2>
+  <div class="menu-show">
+    <div class="menu-head">
+      <div class="menu-body">
+        <h3>店舗名</h3>
+        <p><%= @restaurant.name %></p>
+        <h3>メニュー名</h3>
+        <p><%= @menu.title %></p>
+        <h3>価格（税込）</h3>
+        <h4>正規価格（税込）：</h4>
+        <p><%= @menu.regular_price.to_s(:delimited) %> 円</p>
+        <h4>提供価格（税込）：</h4>
+        <p><%= @menu.discount_price.to_s(:delimited) %> 円</p>
+        <h3>予約方法</h3>
+        <p><%= @menu.reservation_method_i18n %></p>
+      </div>
+      <div class="menu-image"><%= attachment_image_tag @menu, :menu_image, fallback: "no_image.png" %></div>
+    </div>
+    <div class="menu-contents">
+      <h3>内容：</h3>
+      <%= @menu.content %>
+    </div>
+    <div class="menu-cancel">
+      <h3>キャンセル規定</h3>
+      <%= @menu.cancel %>
+    </div>
+  </div>
+  <div class="reservation">
+    <% if user_signed_in? %>
+      <% case @menu.reservation_method %>
+      <% when "not" %>
+        <%= submit_tag '予約情報を入力する', class: "btn btn-success inactive" %>
+        <p>予約不可のメニューです。直接店舗にご来店いただくか、店舗にお問い合わせください。</p>
+      <% when "done" %>
+        <%= form_with url: new_user_reservation_path(current_user), method: :get, local: true do |f| %>
+          <%= f.hidden_field :menu_id, value: params[:id] %>
+          <%= f.submit '予約情報を入力する', class: "btn btn-success" %>
+        <% end %>
+      <% when "simply" %>
+        <%= form_with url: new_user_reservation_path(current_user), method: :get, local: true do |f| %>
+          <%= f.hidden_field :menu_id, value: params[:id] %>
+          <%= f.submit '予約情報を入力する', class: "btn btn-success" %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <%= submit_tag '予約情報を入力する', class: "btn btn-success inactive" %>
+      <p><%= link_to '新規ご登録', new_user_registration_path %>、または<%= link_to 'ログイン', new_user_session_path %>後に予約が可能になります。</p>
+    <% end %>
+  </div>
+  <%= link_to 'メニュー一覧', menus_path %>
+  <%= link_to 'TOP', root_path %>
+</div>

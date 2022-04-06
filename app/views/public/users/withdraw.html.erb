@@ -1,0 +1,12 @@
+<div class="contents public-users-withdraw">
+  <p>本当に退会しますか？</p>
+  <p>メールマガジンが不要な方は<%= link_to 'こちら', user_edit_path %></p>
+  <p>
+    来店前の予約が残っている場合、解約を行うことができません。<br>
+    誠に恐れ入りますが、来店完了後に再度手続きを行ってください。
+  </p>
+
+  <%= form_with model: current_user, url: users_withdrew_path(current_user), method: :post, local: true do |f| %>
+    <%= f.submit '退会する', class: "btn btn-danger" %>
+  <% end %>
+</div>

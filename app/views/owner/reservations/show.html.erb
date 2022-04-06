@@ -1,0 +1,32 @@
+<div class="contents owner-reservations-show">
+  <h2>予約の詳細</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>予約ID</th>
+        <th>予約確定日</th>
+        <th>来店予定日</th>
+        <th>予約者名</th>
+        <th>人数</th>
+        <th>予約メニュー</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @reservation.id %></td>
+        <td><%= @reservation.created_at.to_s(:datetime_jp) %></td>
+        <td><%= @reservation.reservation_date %></td>
+        <td><%= @reservation.user.name %> 様</td>
+        <td><%= @reservation.people %></td>
+        <td><%= @reservation.menu.title %></td>
+      </tr>
+    </tbody>
+  </table>
+  <%= form_with model: @reservation, url: owner_reservation_path(@reservation), method: :patch, local: true do |f| %>
+    <div class="owner-reservations-show--edit-status">
+      <%= f.label :reservation_status %>
+      <%= f.select :reservation_status, Reservation.reservation_statuses_i18n.invert %>
+      <%= f.submit '更新', class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

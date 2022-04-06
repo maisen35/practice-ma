@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <%= display_meta_tags(default_meta_tags) %>
+  <script src="//maps.google.com/maps/api/js?key=<%= ENV['GCP_API_KEY'] %>"></script>
+  <%= include_gon %>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', defer: true %>
+  <% if flash[:notice] %>
+    <%= javascript_include_tag 'flash_window' %>
+  <% end %>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=<%= ENV['GOOGLE_ANALYTICS_TRACKING_ID'] %>"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', "<%= ENV['GOOGLE_ANALYTICS_TRACKING_ID'] %>");
+  </script>
+</head>
+
+<body>
+<header>
+  <div class="layouts-app-header__notice"><p>現在登録されているデータは架空です。</p></div>
+  <div class="layouts-app-header">
+    <%# PC画面ヘッダー %>
+    <div class="flex pc-header">
+      <%= link_to root_path do %>
+        <div><%= image_tag 'logo.png', alt: "header-logo" %></div>
+      <% end %>
+      <div class="header-nav">
+        <nav>
+          <ul class="flex header-ul">
+            <% if master_admin_signed_in? %>
+              <li><%= link_to '管理者TOP', master_path, class: 'btn btn-danger' %></li>
+              <li><%= link_to '管理者ログアウト', destroy_master_admin_session_path, class: "btn btn-danger", method: :delete %></li>
+            <% end %>
+            <% if owner_restaurant_signed_in? %>
+              <li><%= link_to '店舗TOP', owner_restaurant_path(current_owner_restaurant), class: "btn btn-warning" %></li>
+              <li><%= link_to '店舗ログアウト', destroy_owner_restaurant_session_path, class: "btn btn-warning", method: :delete %></li>
+            <% end %>
+            <% if user_signed_in? %>
+              <li><%= link_to 'MyPage', user_mypage_path, class: "btn btn-outline-dark user-mypage" %></li>
+              <% if current_user.user_status == 'guest' %>
+                <li><%= link_to 'ログアウト', destroy_user_session_path, class: "btn btn-danger user-sign_out", method: :delete, data: { confirm: "ゲスト会員はログアウトをすると会員情報が残りません。\n本登録はマイページから行えます。\nログアウトしますか？" } %></li>
+              <% else %>
+                <li><%= link_to 'ログアウト', destroy_user_session_path, class: "btn btn-danger user-sign_out", method: :delete %></li>
+              <% end %>
+            <% else %>
+              <li><%= link_to '新規登録', new_user_registration_path, class: "btn btn-success user-sign_up" %></li>
+              <li><%= link_to 'ログイン', new_user_session_path, class: "btn btn-primary user-sign_in" %></li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <%# スマホ画面ヘッダー %>
+    <div class="flex sp-header">
+      <div class="sp-header__left">
+        <div class="hamburger-button">
+          <span class="bar bar-top"></span>
+          <span class="bar bar-center"></span>
+          <span class="bar bar-bottom"></span>
+        </div>
+        <%# ハンバーガーメーニュー %>
+        <div class="hamburger-menu shut">
+          <ul>
+            <% if user_signed_in? %>
+              <li><%= link_to 'MyPage', user_mypage_path, class: "user-mypage" %></li>
+            <% else %>
+              <li><%= link_to '新規登録', new_user_registration_path, class: "user-sign_up" %></li>
+              <li><%= link_to 'ログイン', new_user_session_path %></li>
+            <% end %>
+            <li><%= link_to 'サービス紹介', about_path, class: "about-service" %></li>
+            <li><%= link_to 'レストラン一覧', restaurants_path, class: "restaurants-index" %></li>
+            <li><%= link_to 'メニュー一覧', menus_path, class: "menus-index" %></li>
+            <% if user_signed_in? && current_user.user_status == 'guest' %>
+              <li><%= link_to 'ログアウト', destroy_user_session_path, class: "user-sign_out", method: :delete, data: { confirm: "ゲスト会員はログアウトをすると会員情報が残りません。\n本登録はマイページから行えます。\nログアウトしますか？" } %></li>
+            <% elsif user_signed_in? %>
+              <li><%= link_to 'ログアウト', destroy_user_session_path, class: "user-sign_out", method: :delete %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <div class="sp-header__center">
+        <%= link_to root_path do %>
+          <div><%= image_tag 'logo.png', alt: "header-logo" %></div>
+        <% end %>
+      </div>
+      <div class="sp-header__right">
+        <% if user_signed_in? %>
+          <%# 未読のお知らせの通知 %>
+          <div class="alert">
+            <i id="alert-bell" class="fa-2x far fa-bell"><div></div></i>
+          </div>
+        <% else %>
+          <%# ログインボタン %>
+          <%= link_to new_user_session_path do %>
+            <span class="login">
+              <i class="fa-2x fas fa-lock"></i>
+              <small>Login</small>
+            </span>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="main">
+    <%= yield %>
+    <%= render partial: 'shared/flash_window' %>
+  </div>
+</main>
+
+<footer>
+  <div class="flex footer-container">
+  <%= link_to root_path do %>
+    <div><%= image_tag 'logo.png', alt: "footer-logo" %></div>
+  <% end %>
+    <div class="footer-menu">
+      <ul class="footer-links">
+        <li><%= link_to 'お問い合わせ', new_contact_path %></li>
+        <li><%= link_to '利用規約', terms_path %></li>
+        <li><%= link_to 'プライバシーポリシー', privacy_path %></li>
+        <li><%= link_to '運営者情報', admin_path %></li>
+      </ul>
+    </div>
+  </div>
+  <div class="copyright">
+    <small>©︎ 2020 MasaoSasaki</small>
+  </div>
+</footer>
+</body>
+</html>

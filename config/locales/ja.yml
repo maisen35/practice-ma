@@ -1,0 +1,122 @@
+ja:
+  activerecord:
+    models:
+      admin: 管理者
+      restaurant: 店舗
+      user: 会員
+      category: カテゴリー
+      bookmark: ブックマーク
+      menu: メニュー
+      reservation: ご予約
+      tag: タグ
+
+    attributes:
+      admin:
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード(再入力)
+        current_password: 現在のパスワード
+
+      restaurant:
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード(再入力)
+        current_password: 現在のパスワード
+        name: 店舗名
+        restaurant_image: 店舗画像
+        introduction: 店舗説明
+        postal_code: 郵便番号
+        prefecture: 都道府県
+        city: 市区町村
+        street: 番地
+        building: 建物名
+        phone_number: 電話番号
+        corporate: ホームページURL
+        twitter: Twitter
+        facebook: Facebook
+        instagram: Instagram
+        completion_message: 予約完了メッセージ
+
+      user:
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード(確認用)
+        current_password: 現在のパスワード
+        name_family: 姓
+        name_first: 名
+        name_family_kana: セイ
+        name_first_kana: メイ
+        handle_name: ハンドルネーム
+        profile: プロフィール
+        profile_image: プロフィール画像
+        twitter: Twitter
+        facebook: Facebook
+        instagram: Instagram
+        phone_number: 電話番号
+        email_sub: メールアドレス2
+        birth_year: 誕生年
+        birth_month: 誕生月
+        birth_day: 誕生日
+        user_status: 会員ステータス
+        profile_image_id: プロフィール画像
+
+      bookmark:
+        user_id: 会員情報
+        restaurant_id: 店舗情報
+
+      menu:
+        restaurant_id: 店舗情報
+        title: メニュー名
+        menu_image_id: メニュー画像
+        content: メニュー説明
+        cancel: キャンセル規定
+        regular_price: 正規価格
+        discount_price: 提供価格
+        reservation_method: 予約方法
+        is_sale_frag: 販売ステータス
+
+      reservation:
+        user_id: 会員情報
+        menu_id: メニュー情報
+        reservation_year: 予約年
+        reservation_month: 予約月
+        reservation_day: 予約日
+        reservation_time: 予約時間
+        people: 人数
+        reservation_status: 予約状況
+        payment_method: 支払い方法
+
+      contact:
+        email: ご連絡先のメールアドレス
+        message: お問い合わせ内容
+
+      tag:
+        name: タグ名
+
+  enums:
+    reservation:
+      payment_method:
+        cash: 店舗でお支払い
+        credit: クレジットカード支払い
+        bank: 銀行振り込み
+      reservation_status:
+        advance: 来店前
+        complete: 来店完了
+        cancel_1: 許容キャンセル1
+        cancel_2: 許容キャンセル2
+        before_cancel: 前日キャンセル
+        on_the_day_cancel: 当日キャンセル
+        serious: 無断キャンセル
+
+    user:
+      user_status:
+        member: 有効会員
+        withdrew: 退会済み
+        forced: 強制退会
+        guest: ゲスト会員
+
+    menu:
+      reservation_method:
+        simply: ご予約のみ
+        done: ご予約可能
+        not: ご予約不可

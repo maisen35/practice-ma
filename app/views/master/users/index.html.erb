@@ -1,0 +1,21 @@
+<div class="contents master-users-index">
+  <h2>会員一覧</h2>
+  <table>
+    <thead>
+      <tr>
+        <td>名前</td>
+        <td>予約状況</td>
+        <td>会員ステータス</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% User.all.each do |user| %>
+        <tr>
+          <td><%= link_to user.name, master_user_path(user) %></td>
+          <td></td>
+          <td><%= user.user_status_i18n %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
